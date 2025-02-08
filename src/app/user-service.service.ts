@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './models/user';
 
@@ -7,20 +7,41 @@ import { User } from './models/user';
   providedIn: 'root'
 })
 export class UserServiceService {
-  private apiUrl = 'http://127.0.0.1:5000'; // Flask API Base URL
+  private apiUrl = 'http://127.0.0.1:5000';  
 
   constructor(private http: HttpClient) {}
 
-  // Submit user data
-  addUser(user: User): Observable<any> {
-    return this.http.post(`${this.apiUrl}/submit`, user);
+  
+  private getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
   }
-
-  // Get all users
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/users`);
-  }
-
 
   
+  addUser(user: User): Observable<any> {
+    console.log("🔹 Sending Data:", user);  
+    return this.http.post(`${this.apiUrl}/submit`, user, { 
+      headers: this.getHeaders(), 
+      withCredentials: true  
+    });
+  }
+
+  
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/users`, { withCredentials: true });
+  }
+
+  
+  updateUser(userId: number, updatedUser: User): Observable<any> {
+    return this.http.put(`${this.apiUrl}/update/${userId}`, updatedUser, { 
+      headers: this.getHeaders(), 
+      withCredentials: true 
+    });
+  }
+
+  
+  deleteUser(userId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/delete/${userId}`, { withCredentials: true });
+  }
 }

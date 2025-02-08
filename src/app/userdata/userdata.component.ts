@@ -1,35 +1,63 @@
 import { Component, OnInit } from '@angular/core';
-import { UserServiceService } from '../user-service.service';  // Import the service
-import { User } from '../models/user';  // Import the User model
-import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { UserServiceService } from '../user-service.service';
+import { User } from '../models/user';
+import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';  
+import { FormsModule } from '@angular/forms';  
 
 @Component({
   selector: 'app-userdata',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],  
   templateUrl: './userdata.component.html',
   styleUrls: ['./userdata.component.css']
 })
 export class UserdataComponent implements OnInit {
-  users: User[] = [];  // Declare a variable to hold users
-  message: string = '';
+  users: User[] = [];
+  message: string = '';  
 
-  constructor(private userService: UserServiceService) {}
+  constructor(private userService: UserServiceService, private router: Router) {}
 
   ngOnInit(): void {
-    this.getUsers();  // Call the method to fetch users when the component initializes
+    this.getUsers();
   }
 
-  // Fetch users from the API
   getUsers() {
     this.userService.getUsers().subscribe(
       (data: User[]) => {
-        this.users = data;  // Store the users in the component
+        this.users = data;
       },
       error => {
-        this.message = 'Error fetching users!';
-        console.error(error);
+        this.message = 'Error fetching users!';  // Set the message when error occurs
+        console.error('Error fetching users', error);
       }
     );
+  }
+
+  addUser() {  
+    this.router.navigate(['/add-user']);
+  } 
+
+  updateUser(userId: number) {
+    this.router.navigate(['/update-user', userId]);
+  }
+
+  deleteUser(userId: number) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.deleteUser(userId).subscribe(response => {
+          Swal.fire('Deleted!', 'User has been deleted.', 'success');
+          this.getUsers();
+        });
+      }
+    });
   }
 }

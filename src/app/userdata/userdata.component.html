@@ -1,5 +1,10 @@
 <div class="user">
-    <h3>Users Management</h3>
+    <h3>
+      Users Management |
+      <div class="search-container">  <img src="https://tse1.mm.bing.net/th?id=OIP.TmL48Z93h3HAn8JZfawh1gHaFj&pid=Api&P=0&h=180" alt="Search" class="search-icon">  <input type="text" class="search-input" placeholder="Search users...">
+      </div>
+      <button class="btn btn-primary add-user-btn" (click)="addUser()">Add User</button>
+    </h3>
     <hr />
     <table class="table table-striped">
       <thead>
@@ -21,9 +26,9 @@
           <td>{{ user.address }}</td>
           <td>{{ user.phone }}</td>
           <td>
-            <button class="btn btn-info me-3">Info</button>
-            <button class="btn btn-danger">
-              <i class="fas fa-trash"></i>
+            <button class="btn btn-info me-3" (click)="updateUser(user.id!)">Update</button>
+            <button class="btn btn-danger" (click)="deleteUser(user.id!)">
+              <i class="fas fa-trash"></i> Delete
             </button>
           </td>
         </tr>

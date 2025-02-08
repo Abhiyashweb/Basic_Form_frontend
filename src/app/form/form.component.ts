@@ -37,7 +37,7 @@ export class FormComponent implements OnInit {
       error => {
         this.message = 'Error submitting form!';
         
-        // Error alert using SweetAlert
+        
         Swal.fire({
           icon: 'error',
           title: 'Oops...',

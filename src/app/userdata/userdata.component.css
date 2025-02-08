@@ -1,20 +1,131 @@
-.user{
-    border: 1px solid black;
-    border-radius: 1rem;
-    padding: 10px;
-    margin-bottom: 40px;
-    background-color: #ffffff9e;
-  }
-  
-  .user h3{
-    font-weight: bold;
-    margin-left: 10px;
-  }
-  
-  .btn{
-    font-weight: bold;
-  }
-  
-  td{
-    background-color: #ffffffab;
-  }
+.user {
+  font-family: sans-serif;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Add transition for smooth effects */
+}
+
+.user:hover {
+  transform: translateY(-5px); /* Move slightly up on hover */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* Slightly larger shadow on hover */
+}
+
+.user h3 {
+  color: #343a40;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.add-user-btn {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.add-user-btn:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+  background-color: white;
+}
+
+.table th {
+  background-color: #f2f2f2;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+  border-color: #138496;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #bd2130;
+  border-color: #bd2130;
+}
+
+.me-3 {
+  margin-right: 1rem !important;
+}
+
+.fa-trash {
+  margin-left: 5px;
+}
+
+.user p {
+  margin-top: 20px;
+  color: #6c757d;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  flex-grow: 1;
+  max-width: calc(100% - 150px);
+}
+
+.search-icon {
+  width: 36px;
+  height: 36px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.search-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  flex-grow: 1;
+  height: 36px;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.user h3 {
+    justify-content: flex-start;
+}
+
+.add-user-btn {
+    margin-left: auto;
+}
